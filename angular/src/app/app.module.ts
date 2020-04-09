@@ -1,0 +1,46 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { HomeComponent } from './components/home/home.component';
+
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/authconfig.interceptor';
+import { TratesComponent } from './components/trates/trates.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+import {MatInputModule, MatTableModule, MatToolbarModule,MatPaginatorModule  } from '@angular/material';
+import { CommonModule } from '@angular/common';
+import { HistoricalComponent } from './components/historical/historical.component';
+@NgModule({
+  declarations: [
+    AppComponent,
+    SigninComponent,
+    SignupComponent,
+    UserProfileComponent,
+    HomeComponent,
+    TratesComponent,
+    HistoricalComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,BrowserAnimationsModule,MatPaginatorModule,
+    HttpClientModule,CommonModule, MatToolbarModule, MatInputModule, MatTableModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
